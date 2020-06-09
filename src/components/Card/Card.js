@@ -1,21 +1,21 @@
 import React from 'react'
-import Image from '../Image/Image'
-import CardBody from '../CardBody/CardBody'
 import './Card.css'
 
 /**
- * Компонент - карточка с картинкой, заголовком, текстом
+ * Компонент - карточка с картинкой, заголовком,
+ * текстом, доп текстом и ссылкой
  */
-function Card({ img, ...props }) {
+function Card({ img, title, text, text2, href, className, ...props }) {
   return (
-    <div className={props.className || 'card'} style={{ width: props.width }}>
-      <Image src={img}/>
-      <CardBody>
-        {props.children}
-      </CardBody>
+    <div {...props} className={(className || '') + ' card'}>
+      <a href={href || '#'}>
+        {img && <img className='card-image' src='img' alt=''/>}
+        {title && <div className='card-title'>{title}</div>}
+        {text && <div className='card-text'>{text}</div>}
+        {text2 && <div className='card-text2'>{text2}</div>}
+      </a>
     </div>
-  )
+  );
 }
 
-export default Card
-
+export default Card;

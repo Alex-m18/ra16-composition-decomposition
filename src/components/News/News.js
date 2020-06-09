@@ -1,26 +1,28 @@
 import React from 'react'
-import Block from '../Block/Block'
-import List from '../List/List';
-import AccentLink from '../AccentLink/AccentLink';
-import ListItem from '../ListItem/ListItem';
 import InlineCard from '../InlineCard/InlineCard';
-import Currencies from '../Currencies/Currencies';
-import { nanoid } from 'nanoid'
+import moment from 'moment';
+import './News.css'
 
 /**
  * Компонент - блок с новостями
  */
-function News(props) {
+function News({newsSections, news, currencies, ...props}) {
+  moment.locale('ru');
   return (
-    <Block className='news-block'>
-        <Block className='news-sections' direction='row'>
-          {props.newsSections.map((o) => <AccentLink key={nanoid(4)} faded={o.faded}>{o.text}</AccentLink>)}
-        </Block>
-        <List items={props.news}>
-          {(items) => items.map((o) => <ListItem key={nanoid(4)}><InlineCard img={o.img}>{o.text}</InlineCard></ListItem>)}
-        </List>
-        <Currencies count={3}/>
-    </Block>
+    <div className='news'> {/* можно завернуть в компонент */}
+      <div className='news-header'>
+        {newsSections.map((o, index) =>
+          <a className={`h3 ${o.faded && 'faded'}`} href={o.href || '#'} key={index}>{o.text}</a>
+        )}
+        <div className='header-date'>{moment().format('llll')}</div>
+      </div>
+      <div className='news-body'>
+        {news.map((o, index) => <InlineCard {...o} key={index}/>)}
+      </div>
+      <div className='news-footer'>
+        {currencies.map((o, index) => <InlineCard {...o} key={index}/>)}
+      </div>
+    </div>
   )
 }
 

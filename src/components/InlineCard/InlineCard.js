@@ -1,16 +1,14 @@
-import React from 'react'
-import Card from '../Card/Card'
-import './InlineCard.css'
+import React from 'react';
+import Card from '../Card/Card';
+import './InlineCard.css';
 
 /**
- * Компонент - однострочная карточка
+ * Карточка в виде строки
  */
 function InlineCard(props) {
   return (
-    <Card {...props} className='inline-card'>
-      {props.children}
-    </Card>
-  )
+    <Card {...props} className='inline-card'/>
+  );
 }
 
-export default InlineCard
+export default InlineCard;
